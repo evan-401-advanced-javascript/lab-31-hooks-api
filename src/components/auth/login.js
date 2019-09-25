@@ -8,6 +8,12 @@ const If = props => {
   return !!props.condition ? props.children : null;
 };
 
+/**
+ * Allows a user to enter a username and password and then passes that info the the auth file on submit.
+ * @param props
+ * @returns {*}
+ * @constructor
+ */
 export default function Login(props) {
 
   const [username, setUsername] = useState("");

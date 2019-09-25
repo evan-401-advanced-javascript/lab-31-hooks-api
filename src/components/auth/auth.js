@@ -9,6 +9,13 @@ const If = props => {
 
 console.log('auth loaded');
 
+
+/**
+ * Function that takes in the username and password entered in login and then passes that info to authorizer. If the username and password match we will render the props.children
+ * @param props
+ * @returns {*}
+ * @constructor
+ */
 export default function Auth (props) {
   return (
     <LoginContext.Consumer>

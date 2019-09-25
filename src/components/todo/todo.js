@@ -9,6 +9,12 @@ const initialState = {
   toDoItem: [],
 };
 
+/**
+ * function takes item and toggles the status of an item when the item is clicked using a switch. This adds and removes a strike from the item.
+ * @param state
+ * @param action
+ * @returns {{status: boolean}}
+ */
 function reducer (state, action) {
   switch (action.type) {
     case "toggle":
@@ -22,8 +28,12 @@ function reducer (state, action) {
   }
 }
 
+/**
+ * Function allows for the adding of items to the list and for items to be clicked on to trigger the reducer.
+ * @returns {*}
+ * @constructor
+ */
 export default function Todo() {
-
 
   const [item, setItem] = useState("");
   const [toDoItem, SetToDoItem] = useState([]);

@@ -8,6 +8,12 @@ import Header from './components/header/header.js';
 
 import './site.scss';
 
+/**
+ * Main function setting where header and todo render
+ * @returns {*}
+ * @constructor
+ */
+
 function App() {
   return (
     <BrowserRouter>
