@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {LoginContext} from './context.js';
@@ -10,11 +10,9 @@ const If = props => {
 console.log('auth loaded');
 
 export default function Auth (props) {
-  console.log("AUTH RENDER");
   return (
     <LoginContext.Consumer>
       {context => {
-        console.log(context);
         let okToRender =
           context.loggedIn &&
           (props.capability

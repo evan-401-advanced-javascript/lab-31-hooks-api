@@ -1,21 +1,34 @@
-import React, { useState} from 'react';
+import React, { useState, useReducer} from 'react';
 
 import Auth from '../auth/auth.js';
 
 import styles from './todo.module.scss';
 
-export default function Todo(props) {
+const initialState = {
+  item: '',
+  toDoItem: [],
+};
+
+function reducer (state, action) {
+  switch (action.type) {
+    case "toggle":
+      if (action.data.status === true) {
+        return {...state, status: action.data.status = false};
+      } else {
+        return {...state, status: action.data.status = true};
+      }
+    default:
+      throw new Error();
+  }
+}
+
+export default function Todo() {
+
 
   const [item, setItem] = useState("");
   const [toDoItem, SetToDoItem] = useState([]);
 
-  function reducer (state, action) {
-    switch (action.type) {
-      case "add item":
-        return {...state, toDoItem: action.data}
-    }
-  }
-
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   function handleForm(e) {
     e.preventDefault();
@@ -30,13 +43,12 @@ export default function Todo(props) {
 
   function toggle (e,id) {
     e.preventDefault();
-    let toDoItemObj = toDoItem.map( (item, idx) =>
-      idx === id ? {title:item.title, status:!item.status} : item
+    toDoItem.map( (item, idx) =>
+      idx === id ? dispatch({type: 'toggle', data: item}) : item
     );
-    SetToDoItem({toDoItem: toDoItemObj});
   }
 
-
+  console.log(state);
   return (
     <section className={styles.todo}>
 

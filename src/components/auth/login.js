@@ -1,5 +1,5 @@
 import superagent from 'superagent';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {LoginContext} from './context.js';
 
 const API = process.env.REACT_APP_API;
