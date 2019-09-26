@@ -1,13 +1,13 @@
-# LAB - 29
+# LAB - 31
 
- ## react-testing
+ ## Hooks
 
  ### Author: Evan Brecht-Curry
 
  ### Links and Resources
-* [submission PR](https://github.com/evan-401-advanced-javascript/lab-27-react-testing/pull/1)
-* [travis](https://www.travis-ci.com/evan-401-advanced-javascript/lab-27-react-testing)
-* [netlify](https://boring-brown-b22f57.netlify.com/) 
+* [submission PR](https://github.com/evan-401-advanced-javascript/lab-31-hooks-api/pull/1)
+* [travis](https://www.travis-ci.com/evan-401-advanced-javascript/lab-31-hooks-api)
+* [netlify](https://priceless-nobel-74fc60.netlify.com/) 
 * [docs]( http://localhost:6060/)
 
  ##### Exported Values and Methods
@@ -16,6 +16,8 @@
 * `npx styleguidist server`
 
 #### `.env` requirements
+* `REACT_APP_API=https://api-js401.herokuapp.com`
+* `REACT_APP_SECRET=supersecret`
 
  #### UML
 ![UML](uml.png)

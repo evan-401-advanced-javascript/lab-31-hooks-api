@@ -1,17 +1,23 @@
 import superagent from 'superagent';
-import React, {useState, useEffect} from 'react';
-import {LoginContext} from './context.js';
+import React, { useState } from 'react';
+import { LoginContext } from './context.js'; // eslint-disable-line
 
 const API = process.env.REACT_APP_API;
 
-const If = props => {
-  return !!props.condition ? props.children : null;
+const If = (props) => {
+  return props.condition ? props.children : null;
 };
 
-export default function Login(props) {
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+/**
+ * Allows a user to enter a username and password and then
+ * passes that info the the auth file on submit.
+ * @param props
+ * @returns {*}
+ * @constructor
+ */
+export default function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   function handleChangeUsername(e) {
     console.log('changed username');
@@ -28,8 +34,8 @@ export default function Login(props) {
     superagent
       .post(`${API}/signin`)
       .auth(username, password)
-      .then(response => {
-        let token = response.text;
+      .then((response) => {
+        const token = response.text;
         loginMethodFromContext(token);
       })
       .catch(console.error);
@@ -37,7 +43,7 @@ export default function Login(props) {
 
   return (
     <LoginContext.Consumer>
-      {context => {
+      {(context) => {
         return (
           <>
             <If condition={context.loggedIn}>
@@ -69,4 +75,3 @@ export default function Login(props) {
     </LoginContext.Consumer>
   );
 }
-

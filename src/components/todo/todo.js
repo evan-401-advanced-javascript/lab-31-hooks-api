@@ -1,51 +1,70 @@
-import React, { useState} from 'react';
+import React, { useState, useReducer } from 'react';
 
-import Auth from '../auth/auth.js';
+import Auth from '../auth/auth.js'; // eslint-disable-line
 
 import styles from './todo.module.scss';
 
-export default function Todo(props) {
+const initialState = {
+  item: '',
+  toDoItem: [],
+};
 
-  const [item, setItem] = useState("");
+/**
+ * function takes item and toggles the status of an item when the
+ * item is clicked using a switch. This adds and removes a strike from the item.
+ * @param state
+ * @param action
+ * @returns {{status: boolean}}
+ */
+function reducer(state, action) {
+  switch (action.type) {
+    case 'toggle':
+      if (action.data.status === true) {
+        return { ...state, status: action.data.status = false }; // eslint-disable-line
+      } 
+      return { ...state, status: action.data.status = true }; // eslint-disable-line
+      
+    default:
+      throw new Error();
+  }
+}
+
+/**
+ * Function allows for the adding of items to the
+ * list and for items to be clicked on to trigger the reducer.
+ * @returns {*}
+ * @constructor
+ */
+export default function Todo() {
+  const [item, setItem] = useState('');
   const [toDoItem, SetToDoItem] = useState([]);
 
-  function reducer (state, action) {
-    switch (action.type) {
-      case "add item":
-        return {...state, toDoItem: action.data}
-    }
-  }
-
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   function handleForm(e) {
     e.preventDefault();
     e.target.reset();
-    let itemObj = {title: item, status:false};
+    const itemObj = { title: item, status: false };
     SetToDoItem([...toDoItem, itemObj]);
   }
 
-  function handleChange (e) {
+  function handleChange(e) {
     setItem(e.target.value);
   }
 
-  function toggle (e,id) {
+  function toggle(e, id) {
     e.preventDefault();
-    let toDoItemObj = toDoItem.map( (item, idx) =>
-      idx === id ? {title:item.title, status:!item.status} : item
-    );
-    SetToDoItem({toDoItem: toDoItemObj});
+    toDoItem.map((item, idx) => (idx === id ? dispatch({ type: 'toggle', data: item }) : item)); // eslint-disable-line
   }
 
-
+  console.log(state);
   return (
     <section className={styles.todo}>
 
       <Auth capability="read">
-        {toDoItem.map((item, idx) =>
-          <div key={idx} onClick={(e) => toggle(e, idx)}>
+        {toDoItem.map((item, idx) => <div key={idx} onClick={e => toggle(e, idx)}>
             <span className={styles[`complete-${item.status}`]}> {item.title} </span>
-          </div>
-        )}
+          </div>)}
       </Auth>
 
       <Auth capability="create">
